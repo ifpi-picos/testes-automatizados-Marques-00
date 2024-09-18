@@ -33,7 +33,23 @@ export default class ContaBancaria {
       }
     }
   
-  
-  
+    //públcio é quando você  faz, privado quando você não faz
+    private receberTransferencia (valor: number, conta: ContaBancaria){
+      conta.saldo+=valor
+      conta.extrato.push (`Transferencia de ${valor} recebida`)
+      
+    }
+    public transferir (valor: number, conta: ContaBancaria){
+      if (valor >0 && valor <= this.saldo){
+        conta.receberTransferencia (valor, conta)
+        this.saldo -= valor
+        this.extrato.push (`Transferencia de ${valor} recebida`)
+        return this.saldo
+      } else {
+        throw new Error ("Valor inválido ou saldo de insuficiente")
+      }
+    }
   }
+
+
   
